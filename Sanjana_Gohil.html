@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanjana Gohil | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-card: rgba(22, 30, 49, 0.75);
+      --bg-card-hover: rgba(30, 41, 69, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.22);
+      --primary-dark: #0284c7;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.65;
+      background-image: 
+        radial-gradient(at 10% 15%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+        radial-gradient(at 90% 85%, rgba(14, 165, 233, 0.06) 0px, transparent 50%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 16px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px;
+      border-radius: 30px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none; 
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+    nav a.active {
+      color: #031120;
+      background: var(--primary);
+      box-shadow: 0 2px 10px var(--primary-glow);
+    }
+
+    /* Page Containers */
+    .page {
+      display: none;
+      flex: 1;
+      padding: 60px 8%;
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Typography Utilities */
+    h1 {
+      font-size: clamp(38px, 5.5vw, 62px);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin: 16px 0 22px;
+    }
+
+    h1 span, .accent {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 36px;
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+
+    /* Hero Section */
+    #home.active {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      min-height: calc(85vh - 80px);
+    }
+
+    .hero-content {
+      flex: 1.2;
+    }
+
+    .hero-content p {
+      color: var(--text-muted);
+      font-size: 17px;
+      max-width: 540px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .profile {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #162035, #0d1527);
+      border: 2.5px solid var(--border-accent);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px var(--primary-glow);
+    }
+
+    .profile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: var(--radius-sm);
+      background: var(--primary);
+      color: #04101c;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px var(--primary-glow);
+    }
+
+    .outline-btn {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .outline-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: none;
+    }
+
+    /* Cards & Grids */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(1.3fr 1fr 1fr ));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-accent);
+      background: var(--bg-card-hover);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Skills Progress Bars */
+    .skill-metric {
+      margin-top: 14px;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .progress {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #818cf8);
+      border-radius: 10px;
+    }
+
+    /* Forms */
+    .contact-form {
+      max-width: 540px;
+      background: var(--bg-card);
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 11px 14px;
+      background: rgba(13, 19, 33, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    #formStatus {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px;
+      background: rgba(9, 13, 22, 0.95);
+      color: var(--text-dim);
+      font-size: 13px;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      header {
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px 5%;
+      }
+
+      #home.active {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 30px;
+      }
+
+      .hero-content p {
+        margin: 0 auto 24px;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .profile {
+        width: 190px;
+        height: 190px;
+      }
+
+      .page {
+        padding: 40px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="logo">Sanjana<span>Gohil</span></div>
+
+    <nav>
+      <a href="#home" data-page="home" class="active">Home</a>
+      <a href="#about" data-page="about">About</a>
+      <a href="#skills" data-page="skills">Skills</a>
+      <a href="#projects" data-page="projects">Projects</a>
+      <a href="#contact" data-page="contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Home Page -->
+  <section class="page active" id="home">
+    <div class="hero-content">
+      <div class="badge">BCA UNDERGRADUATE & DEVELOPER</div>
+      <h1>Building clean, modern<br><span>web interfaces.</span></h1>
+      <p>
+        Hi, I'm Sanjana Gohil. I focus on developing clean front-end experiences, 
+        practical software solutions, and continuous learning across modern web technologies.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn" data-page="projects">View Work</a>
+        <a href="#contact" class="btn outline-btn" data-page="contact">Contact Me</a>
+      </div>
+    </div>
+
+    <div class="avatar-wrapper">
+      <div class="profile" aria-label="Sanjana Gohil Avatar">
+        <img src="SANJU_PHOTOS.jpeg" alt="Sanjana Gohil">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Page -->
+  <section class="page" id="about">
+    <h2>About <span class="accent">Me</span></h2>
+    <p class="section-desc">Academic background and career objectives.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Education</h3>
+        <p><strong>BCA (2nd Year)</strong><br>ITM SLS Baroda University, Baroda</p>
+        <p>Foundations in software engineering, database design, and algorithmic problem-solving.</p>
+      </div>
+
+      <div class="card">
+        <h3>Primary Focus</h3>
+        <p>Creating responsive layouts, modular CSS, interactive client-side logic in JavaScript, and learning backend integration with Python and Java.</p>
+      </div>
+
+      <div class="card">
+        <h3>Work Ethic</h3>
+        <p>Detail-oriented problem solver focused on cross-device consistency, clean code structure, and fast user load times.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Page -->
+  <section class="page" id="skills">
+    <h2>Core <span class="accent">Competencies</span></h2>
+    <p class="section-desc">Key programming languages, frameworks, and developer tools.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>HTML5 & Semantic Markup</h3>
+        <p>Accessible structures, modern forms, and standards-compliant document layout.</p>
+        <div class="skill-metric">
+          <div class="skill-label"><span>PROFICIENCY</span><span>90%</span></div>
+          <div class="progress"><span style="width:90%"></span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Modern CSS3</h3>
+        <p>Responsive design, Flexbox, CSS Grid layouts, and custom animations.</p>
+        <div class="skill-metric">
+          <div class="skill-label"><span>PROFICIENCY</span><span>85%</span></div>
+          <div class="progress"><span style="width:85%"></span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>JavaScript (ES6+)</h3>
+        <p>DOM manipulation, event handling, dynamic components, and form validation.</p>
+        <div class="skill-metric">
+          <div class="skill-label"><span>PROFICIENCY</span><span>75%</span></div>
+          <div class="progress"><span style="width:75%"></span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Backend & Databases</h3>
+        <p>Working knowledge of Python, MySQL, Git/GitHub, and core Java fundamentals.</p>
+        <div class="skill-metric">
+          <div class="skill-label"><span>FOUNDATION</span><span>70%</span></div>
+          <div class="progress"><span style="width:70%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Page -->
+  <section class="page" id="projects">
+    <h2>Featured <span class="accent">Projects</span></h2>
+    <p class="section-desc">Practical academic and hands-on developments.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Laptop Shop Web Platform</h3>
+        <p>
+          A responsive e-commerce interface featuring dynamic product filtering,
+          image sliders, product catalogs, and custom client-side form validation.
+        </p>
+        <div style="margin-bottom: 10px;">
+          <span class="badge">HTML5</span>
+          <span class="badge">CSS3</span>
+          <span class="badge">JavaScript</span>
+        </div>
+        <a href="#contact" class="btn outline-btn" data-page="contact">Project Details</a>
+      </div>
+
+      <div class="cards">
+      <div class="card">
+        <h3> Bagbuzz Shop Web Platform</h3>
+        <p>
+          We provide affordable, stylish and durable backpacks for school, travel and daily use.
+        </p>
+        <div style="margin-bottom: 18px;">
+          <span class="badge">HTML5</span>
+          <span class="badge">CSS3</span>
+          <span class="badge">JavaScript</span>
+        </div>
+        <a href="#contact" class="btn outline-btn" data-page="contact">Project Details</a>
+      </div>
+
+      <div class="cards">
+      <div class="card">
+        <h3> Saloon Shop Web Platform</h3>
+        <p>
+          We offer stylish haircuts, beauty treatments, and professional salon services to help you look and feel your best.
+
+        </p>
+        <div style="margin-bottom: 18px;">
+          <span class="badge">HTML5</span>
+          <span class="badge">CSS3</span>
+          <span class="badge">JavaScript</span>
+        </div>
+        <a href="#contact" class="btn outline-btn" data-page="contact">Project Details</a>
+      </div>
+
+
+      <div class="card">
+        <h3>Personal Portfolio UI</h3>
+        <p>
+          A single-page architectural portfolio utilizing pure CSS styling, 
+          vanilla JS hash routing, and dark glassmorphic styling.
+        </p>
+        <div style="margin-bottom: 18px;">
+          <span class="badge">Vanilla JS</span>
+          <span class="badge">Responsive UI</span>
+        </div>
+        <a href="#contact" class="btn outline-btn" data-page="contact">View Architecture</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Page -->
+  <section class="page" id="contact">
+    <h2>Get In <span class="accent">Touch</span></h2>
+    <p class="section-desc">Open for internships, academic projects, and entry-level opportunities.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+      <div class="card" style="height: fit-content;">
+        <h3>Direct Contact</h3>
+        <p style="margin-top: 12px;"><strong>Email:</strong> Sanjanagohil17@gmail.com</p>
+        <p><strong>Location:</strong> Panchmahal, Gujarat, India</p>
+        <p><strong>Profiles:</strong> GitHub &bull; LinkedIn</p>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Your Name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Email Adddress" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="How can I help you?" required></textarea>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+        <p id="formStatus" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Sanjana Gohil. Built with clean HTML, CSS & JavaScript.</p>
+  </footer>
+
+  <script>
+    const pages = document.querySelectorAll(".page");
+    const navLinks = document.querySelectorAll("nav a");
+
+    function showPage(pageName) {
+      const targetPage = document.getElementById(pageName);
+      if (!targetPage) return;
+
+      pages.forEach(page => page.classList.toggle("active", page.id === pageName));
+      navLinks.forEach(link => link.classList.toggle("active", link.dataset.page === pageName));
+
+      if (window.location.hash !== "#" + pageName) {
+        history.pushState(null, "", "#" + pageName);
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-page]").forEach(link => {
+      link.addEventListener("click", function(event) {
+        event.preventDefault();
+        showPage(this.dataset.page);
+      });
+    });
+
+    window.addEventListener("popstate", () => {
+      showPage(location.hash.slice(1) || "home");
+    });
+
+    const initialPage = location.hash.slice(1);
+    showPage(document.getElementById(initialPage) ? initialPage : "home");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      document.getElementById("formStatus").textContent = `Thank you, ${name}! Your message has been noted.`;
+      this.reset();
+    });
+  </script>
+</body>
+</html>
